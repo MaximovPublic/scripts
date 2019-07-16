@@ -1,0 +1,2 @@
+# Create AD users using ADUser2019.csv.
+import-csv .\ADUser2019.csv -Encoding UTF8 | % {New-ADUser -GivenName $_.GivenName -Surname $_.Surname -Name $_.Name -SamAccountName $_.SamAccountName -UserPrincipalName $_.UserPrincipalName -Description $_.Description -Path $_.Path -Enabled $True -AccountPassword (ConvertTo-SecureString $_.Password -AsPlainText -force) -PasswordNeverExpires $True}

@@ -1,0 +1,2 @@
+# How many times .pdf files were accessed (excluding bots, pravila.pdf, favicons for browser tabs and 206 partial content) via Gecko/Gecko like engines at IIS site ID 7.
+Get-ChildItem C:\inetpub\logs\LogFiles\W3SVC7 -I *.log -R | Where {$_.LastWriteTime -gt (GetDate).AddYears(-2)} | Select-String ".pdf" | Select-String "Gecko" | Where-Object {$_ -NotLike "*pravila.pdf*"} | Where-Object {$_ -NotLike "*.pdf*206 0*"} | Where-Object {$_ -NotLike "*bot.html) - 200*"} | Where-Object {$_ -NotLike "*favicon.ico*"} | Out-File -Width 4095 pdf-Gecko.txt
